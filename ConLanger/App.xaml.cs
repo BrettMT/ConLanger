@@ -13,5 +13,14 @@ namespace ConLanger
     /// </summary>
     public partial class App : Application
     {
+        ConLanger.Logic.Langer Langs = new Logic.Langer();
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow wnd = new MainWindow(Langs);
+
+            wnd.Title = "Con Langer Version 0.0";
+            wnd.Show();
+        }
     }
 }

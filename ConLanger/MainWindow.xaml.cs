@@ -20,9 +20,11 @@ namespace ConLanger
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        //Hey dont forget, the Langer object exist at the application level.
+        public MainWindow(Logic.Langer L)
         {
             InitializeComponent();
+            mainFrame.Navigate(new Pages.LanguagePage(L));
         }
     }
 }

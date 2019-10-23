@@ -1,0 +1,56 @@
+﻿using ConLanger.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConLanger.Logic
+{
+    public class Langer
+    {
+        //Currently 10/22 a new Language is made when you use the Create Language button otherwise this is just null. TODO: Be able to to load saved languages.
+
+        //TODO: Nothing other than LanguageName checks if language is null when it tries to use it. Language defaults to null and is not set unless Create or Load language actions take place.
+        internal Language Language;
+
+        public event EventHandler ChangedLanguages;
+
+
+        public string LanguageName
+        {
+            //Quick null check, if no language then return that text otherwise use the name.
+            get
+            {
+                return Language?.Name ?? "No Language Selected";
+            }
+        }
+
+        public void CreateLangauge(string name)
+        {
+            Language = new Language(name);
+            ChangedLanguages.Invoke(this, null);
+        }
+
+
+        public void AddWordType(string name)
+        {
+            Language.WordTypes.Add(new WordType(name));
+        }
+
+        public void AddPhoneme(string iPA, string roman, int weight, string syllableCode)
+        {
+            Language.Phonemes.Add(new Phoneme(iPA, roman, weight, syllableCode));
+        }
+
+        public void AddSyllableStructure(string code)
+        {
+            Language.Syllables.Add(new SyllableStructure(code));
+        }
+
+        public void AddWord(string iPA, string roman, string meaning, string example, WordType type)
+        {
+            Language.Words.Add(new Word(iPA, roman, meaning, example, type));
+        }
+    }
+}
