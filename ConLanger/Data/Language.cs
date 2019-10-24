@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConLanger.Data
 {
-    internal class Language
+    public class Language
     {
         public Language(string name)
         {
@@ -25,7 +25,7 @@ namespace ConLanger.Data
         public List<WordType> WordTypes { get; set; }
     }
 
-    internal class Phoneme
+    public class Phoneme
     {
         public Phoneme(string iPA, string roman, int weight, string syllableCode)
         {
@@ -41,7 +41,7 @@ namespace ConLanger.Data
         public string SyllableCode { get; set;}
     }
 
-    internal class SyllableStructure
+    public class SyllableStructure
     {
         public SyllableStructure(string code)
         {
@@ -61,7 +61,7 @@ namespace ConLanger.Data
         }
     }
 
-    internal class Word
+    public class Word
     {
         public Word(string iPA, string roman, string meaning, string example, WordType type)
         {

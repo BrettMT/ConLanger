@@ -20,11 +20,24 @@ namespace ConLanger
     /// </summary>
     public partial class MainWindow : Window
     {
+        Logic.Langer RefLanger;
+
         //Hey dont forget, the Langer object exist at the application level.
         public MainWindow(Logic.Langer L)
         {
+            RefLanger = L;
             InitializeComponent();
             mainFrame.Navigate(new Pages.LanguagePage(L));
+        }
+
+        private void LangButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new Pages.LanguagePage(RefLanger));
+        }
+
+        private void PhoneButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new Pages.PhoneticPage(RefLanger));
         }
     }
 }

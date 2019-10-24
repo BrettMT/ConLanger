@@ -15,15 +15,20 @@ namespace ConLanger.Logic
         internal Language Language;
 
         public event EventHandler ChangedLanguages;
+        public event EventHandler ChangedPhonemes;
 
-
+        
         public string LanguageName
         {
-            //Quick null check, if no language then return that text otherwise use the name.
             get
             {
+                //Quick null check, if no language then return that text otherwise use the name.
                 return Language?.Name ?? "No Language Selected";
             }
+        }
+        public List<Phoneme> Phonemes
+        {
+            get => Language?.Phonemes ?? throw new NullReferenceException("a Language has not been loaded"); 
         }
 
         public void CreateLangauge(string name)
@@ -38,10 +43,31 @@ namespace ConLanger.Logic
             Language.WordTypes.Add(new WordType(name));
         }
 
+        #region Phoneme functions
         public void AddPhoneme(string iPA, string roman, int weight, string syllableCode)
         {
+            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
             Language.Phonemes.Add(new Phoneme(iPA, roman, weight, syllableCode));
+            if(ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
         }
+       
+        public void EditPhoneme(Phoneme selected, string iPA, string roman, int weight, string syllableCode)
+        {
+            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            selected.IPA = iPA;
+            selected.Roman = roman;
+            selected.Weight = weight;
+            selected.SyllableCode = syllableCode;
+            if (ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
+        }
+
+        public void RemovePhoneme(Phoneme selected)
+        {
+            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            Language.Phonemes.Remove(selected);
+            if (ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
+        }
+        #endregion
 
         public void AddSyllableStructure(string code)
         {
@@ -51,6 +77,13 @@ namespace ConLanger.Logic
         public void AddWord(string iPA, string roman, string meaning, string example, WordType type)
         {
             Language.Words.Add(new Word(iPA, roman, meaning, example, type));
+        }
+    }
+
+    public class UnableToModifyLanguageException : Exception
+    {
+        public UnableToModifyLanguageException(string message) : base(message)
+        {
         }
     }
 }

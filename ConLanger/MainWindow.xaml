@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Frame x:Name="mainFrame" Content="There should be a page here, one moment." HorizontalAlignment="Stretch" Margin="10,35,10,10" VerticalAlignment="Stretch" />
-        <Button x:Name="LangButton" Content="Languages" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0"/>
-        <Button x:Name="PhoneButton" Content="Phonetics" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,10,0,0"/>
+        <Button x:Name="LangButton" Content="Languages" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Click="LangButton_Click"/>
+        <Button x:Name="PhoneButton" Content="Phonetics" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,10,0,0" Click="PhoneButton_Click"/>
         <Button x:Name="WordsButton" Content="Words" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="170,10,0,0"/>
         <Button x:Name="LexiconButton" Content="Lexicon" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="250,10,0,0"/>
 
