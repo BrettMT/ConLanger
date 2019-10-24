@@ -39,5 +39,10 @@ namespace ConLanger
         {
             mainFrame.Navigate(new Pages.PhoneticPage(RefLanger));
         }
+
+        private void WordsButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new Pages.WordTypePage(RefLanger));
+        }
     }
 }

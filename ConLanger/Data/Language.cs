@@ -53,7 +53,7 @@ namespace ConLanger.Data
 
     public class WordType
     {
-        public string Name;
+        public string Name { get; set; }
 
         public WordType(string name)
         {

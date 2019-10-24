@@ -16,8 +16,9 @@ namespace ConLanger.Logic
 
         public event EventHandler ChangedLanguages;
         public event EventHandler ChangedPhonemes;
+        public event EventHandler ChangedWordTypes;
 
-        
+
         public string LanguageName
         {
             get
@@ -31,17 +32,32 @@ namespace ConLanger.Logic
             get => Language?.Phonemes ?? throw new NullReferenceException("a Language has not been loaded"); 
         }
 
+        public List<WordType> WordTypes
+        {
+            get => Language?.WordTypes ?? throw new NullReferenceException("a Language has not been loaded");
+        }
+
         public void CreateLangauge(string name)
         {
             Language = new Language(name);
             ChangedLanguages.Invoke(this, null);
         }
 
-
+        #region Word Type Functions
         public void AddWordType(string name)
         {
+            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
             Language.WordTypes.Add(new WordType(name));
+            if (ChangedWordTypes != null) ChangedWordTypes.Invoke(this, null);
         }
+
+        public void RemoveWordType(WordType wordType)
+        {
+            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            Language.WordTypes.Remove(wordType);
+            if (ChangedWordTypes != null) ChangedWordTypes.Invoke(this, null);
+        }
+        #endregion
 
         #region Phoneme functions
         public void AddPhoneme(string iPA, string roman, int weight, string syllableCode)
