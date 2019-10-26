@@ -18,6 +18,7 @@ namespace ConLanger.Logic
         public event EventHandler ChangedPhonemes;
         public event EventHandler ChangedWordTypes;
 
+       
 
         public string LanguageName
         {
@@ -29,31 +30,32 @@ namespace ConLanger.Logic
         }
         public List<Phoneme> Phonemes
         {
-            get => Language?.Phonemes ?? throw new NullReferenceException("a Language has not been loaded"); 
+            get => Language?.Phonemes ?? throw new NoLanguageException("There is no language set");
         }
-
         public List<WordType> WordTypes
         {
-            get => Language?.WordTypes ?? throw new NullReferenceException("a Language has not been loaded");
+            get => Language?.WordTypes ?? throw new NoLanguageException("There is no language set");
         }
 
         public void CreateLangauge(string name)
         {
             Language = new Language(name);
+            AddWordType("Noun");
+            AddWordType("Verb");
             ChangedLanguages.Invoke(this, null);
         }
 
         #region Word Type Functions
         public void AddWordType(string name)
         {
-            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            if (Language == null) throw new NoLanguageException("There is no language set");
             Language.WordTypes.Add(new WordType(name));
             if (ChangedWordTypes != null) ChangedWordTypes.Invoke(this, null);
         }
 
         public void RemoveWordType(WordType wordType)
         {
-            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            if (Language == null) throw new NoLanguageException("There is no language set");
             Language.WordTypes.Remove(wordType);
             if (ChangedWordTypes != null) ChangedWordTypes.Invoke(this, null);
         }
@@ -62,14 +64,14 @@ namespace ConLanger.Logic
         #region Phoneme functions
         public void AddPhoneme(string iPA, string roman, int weight, string syllableCode)
         {
-            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            if (Language == null) throw new NoLanguageException("There is no language set");
             Language.Phonemes.Add(new Phoneme(iPA, roman, weight, syllableCode));
             if(ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
         }
        
         public void EditPhoneme(Phoneme selected, string iPA, string roman, int weight, string syllableCode)
         {
-            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            if (Language == null) throw new NoLanguageException("There is no language set");
             selected.IPA = iPA;
             selected.Roman = roman;
             selected.Weight = weight;
@@ -79,9 +81,17 @@ namespace ConLanger.Logic
 
         public void RemovePhoneme(Phoneme selected)
         {
-            if (Language == null) throw new UnableToModifyLanguageException("There is no language set");
+            if (Language == null) throw new NoLanguageException("There is no language set");
             Language.Phonemes.Remove(selected);
             if (ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
+        }
+
+        public Phoneme FindPhonemeByIPA(string s)
+        {
+            if (Language == null) throw new NoLanguageException("There is no language set");
+
+            //First of default stops when it finds a match.
+            return Language.Phonemes.FirstOrDefault(ph => ph.IPA == s);
         }
         #endregion
 
@@ -90,15 +100,15 @@ namespace ConLanger.Logic
             Language.Syllables.Add(new SyllableStructure(code));
         }
 
-        public void AddWord(string iPA, string roman, string meaning, string example, WordType type)
+        public void AddWord(List<Phoneme> iPA, string meaning, WordType type)
         {
-            Language.Words.Add(new Word(iPA, roman, meaning, example, type));
+            Language.Words.Add(new Word(iPA, meaning, type));
         }
     }
 
-    public class UnableToModifyLanguageException : Exception
+    public class NoLanguageException : Exception
     {
-        public UnableToModifyLanguageException(string message) : base(message)
+        public NoLanguageException(string message) : base(message)
         {
         }
     }

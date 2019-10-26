@@ -44,5 +44,10 @@ namespace ConLanger
         {
             mainFrame.Navigate(new Pages.WordTypePage(RefLanger));
         }
+
+        private void LexiconButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new Pages.LexiconPage(RefLanger));
+        }
     }
 }

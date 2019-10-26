@@ -63,21 +63,17 @@ namespace ConLanger.Data
 
     public class Word
     {
-        public Word(string iPA, string roman, string meaning, string example, WordType type)
+        public Word(List<Phoneme> iPA, string meaning, WordType type)
         {
             IPA = iPA;
-            Roman = roman;
             Meaning = meaning;
-            Example = example;
             Type = type;
             Variations = new List<Word>();
             Etymology = new List<Word>();
         }
 
-        public string IPA { get; set; }
-        public string Roman { get; set; }
+        public List<Phoneme> IPA { get; set; }
         public string Meaning { get; set; }
-        public string Example { get; set; }
 
         public WordType Type { get; set; }
 

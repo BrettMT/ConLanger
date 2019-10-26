@@ -64,11 +64,16 @@
     </Compile>
     <Compile Include="Data\Language.cs" />
     <Compile Include="Logic\Langer.cs" />
+    <Compile Include="Logic\Tools.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\LanguagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LexiconPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,6 +89,9 @@
   <ItemGroup>
     <Compile Include="Pages\LanguagePage.xaml.cs">
       <DependentUpon>LanguagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LexiconPage.xaml.cs">
+      <DependentUpon>LexiconPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PhoneticPage.xaml.cs">
       <DependentUpon>PhoneticPage.xaml</DependentUpon>

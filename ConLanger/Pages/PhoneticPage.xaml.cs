@@ -30,7 +30,7 @@ namespace ConLanger.Pages
             {
                 Langer.AddPhoneme("test", "test", 1, "C");
             }
-            catch(Logic.UnableToModifyLanguageException e)
+            catch(Logic.NoLanguageException e)
             {
                 //TODO: this should honestly be removed when your done in this section.
             }
@@ -55,7 +55,7 @@ namespace ConLanger.Pages
             {
                 Langer.AddPhoneme(PhoneIPATB.Text, PhoneRomanTB.Text, int.Parse(PhoneWeightTB.Text), PhoneCodeTB.Text);
             }
-            catch (Logic.UnableToModifyLanguageException ex)
+            catch (Logic.NoLanguageException ex)
             {
                 //TODO: throw a log message.
             }
