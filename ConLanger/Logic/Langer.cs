@@ -12,7 +12,8 @@ namespace ConLanger.Logic
         //Currently 10/22 a new Language is made when you use the Create Language button otherwise this is just null. TODO: Be able to to load saved languages.
 
         //TODO: Nothing other than LanguageName checks if language is null when it tries to use it. Language defaults to null and is not set unless Create or Load language actions take place.
-        internal Language Language;
+        private Language Language;
+        private Saver Saver = new Saver();
 
         public event EventHandler ChangedLanguages;
         public event EventHandler ChangedPhonemes;
@@ -43,6 +44,16 @@ namespace ConLanger.Logic
             AddWordType("Noun");
             AddWordType("Verb");
             ChangedLanguages.Invoke(this, null);
+        }
+
+        public void SaveLanguage()
+        {
+            Saver.SerializeLanguageToText(Language, "test");
+        }
+
+        public void LoadLanguage()
+        {
+            Language = Saver.DeSerializeLanguageFromText("test");
         }
 
         #region Word Type Functions

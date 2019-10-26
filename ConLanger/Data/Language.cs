@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConLanger.Data
 {
+    [Serializable]
     public class Language
     {
         public Language(string name)
@@ -25,6 +26,7 @@ namespace ConLanger.Data
         public List<WordType> WordTypes { get; set; }
     }
 
+    [Serializable]
     public class Phoneme
     {
         public Phoneme(string iPA, string roman, int weight, string syllableCode)
@@ -41,6 +43,7 @@ namespace ConLanger.Data
         public string SyllableCode { get; set;}
     }
 
+    [Serializable]
     public class SyllableStructure
     {
         public SyllableStructure(string code)
@@ -51,6 +54,7 @@ namespace ConLanger.Data
         public string Code { get; set; }
     }
 
+    [Serializable]
     public class WordType
     {
         public string Name { get; set; }
@@ -61,6 +65,7 @@ namespace ConLanger.Data
         }
     }
 
+    [Serializable]
     public class Word
     {
         public Word(List<Phoneme> iPA, string meaning, WordType type)

@@ -42,5 +42,15 @@ namespace ConLanger.Pages
         {
             CurrentLanguageLabel.Content = Langer.LanguageName;
         }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Langer.SaveLanguage();
+        }
+
+        private void LoadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Langer.LoadLanguage();
+        }
     }
 }
