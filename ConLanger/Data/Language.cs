@@ -27,23 +27,6 @@ namespace ConLanger.Data
     }
 
     [Serializable]
-    public class Phoneme
-    {
-        public Phoneme(string iPA, string roman, int weight, string syllableCode)
-        {
-            IPA = iPA;
-            Roman = roman;
-            Weight = weight;
-            SyllableCode = syllableCode;
-        }
-
-        public string IPA { get; set; }
-        public string Roman { get; set; }
-        public int Weight { get; set; }
-        public string SyllableCode { get; set;}
-    }
-
-    [Serializable]
     public class SyllableStructure
     {
         public SyllableStructure(string code)

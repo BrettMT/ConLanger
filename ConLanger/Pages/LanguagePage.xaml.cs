@@ -51,6 +51,7 @@ namespace ConLanger.Pages
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
             Langer.LoadLanguage();
+
         }
     }
 }

@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\Language.cs" />
+    <Compile Include="Data\Phoneme.cs" />
     <Compile Include="Logic\Langer.cs" />
     <Compile Include="Logic\Saver.cs" />
     <Compile Include="Logic\Tools.cs" />

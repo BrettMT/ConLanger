@@ -54,6 +54,7 @@ namespace ConLanger.Logic
         public void LoadLanguage()
         {
             Language = Saver.DeSerializeLanguageFromText("test");
+            ChangedLanguages.Invoke(this, null);
         }
 
         #region Word Type Functions
@@ -73,20 +74,17 @@ namespace ConLanger.Logic
         #endregion
 
         #region Phoneme functions
-        public void AddPhoneme(string iPA, string roman, int weight, string syllableCode)
+        public void AddPhoneme(string typedChar, string iPA, string roman, int weight, string syllableCode)
         {
             if (Language == null) throw new NoLanguageException("There is no language set");
-            Language.Phonemes.Add(new Phoneme(iPA, roman, weight, syllableCode));
+            Language.Phonemes.Add(new Phoneme(typedChar, iPA, roman, weight, syllableCode));
             if(ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
         }
        
-        public void EditPhoneme(Phoneme selected, string iPA, string roman, int weight, string syllableCode)
+        public void EditPhoneme(Phoneme selected, string typedChar, string iPA, string roman, int weight, string syllableCode)
         {
             if (Language == null) throw new NoLanguageException("There is no language set");
-            selected.IPA = iPA;
-            selected.Roman = roman;
-            selected.Weight = weight;
-            selected.SyllableCode = syllableCode;
+            selected.Edit(typedChar, iPA, roman, weight, syllableCode);
             if (ChangedPhonemes != null) ChangedPhonemes.Invoke(this, null);
         }
 
